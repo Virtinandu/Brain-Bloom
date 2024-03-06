@@ -49,34 +49,26 @@ def display_about_page():
 if __name__ == "__main__":
     main()
 
-# Adding HTML and CSS styling
-st.markdown(
-    """
-    <style>
-        body {
-            background-color:  #E6E6FA;
-            font-family: Arial, sans-serif;
-        }
-        .sidebar .sidebar-content {
-            background-color: #333;
-            color: #fff;
-        }
-        .sidebar .title {
-            color: #fff;
-        }
-        .st-bd {
-            padding: 20px;
-        }
-        .st-df {
-            background-color: #000000;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3, h4, h5, h6 {
-            color: #333;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+"""
+<DOCTYPE html>
+<html>
+<head>
+<title>BRAIN BLOOM PROJECT<title>
+<style type ="text/css">
+{padding:0;margin:0;box-sizing:border-box;}
+header{
+width:100%;
+height:100vh;
+background:url(img/LanadelRey.JPEG);
+backgroung-size:cover;
+}
+</style>
+</head>
+<body>
+<header>
+
+</header>
+</body>
+<html>
+
+"""
