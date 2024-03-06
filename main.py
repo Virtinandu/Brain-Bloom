@@ -1,43 +1,21 @@
-import streamlit as st
-import PyPDF2
+from flask import Flask, render_template, send_from_directory
 
-# Title and brief description
-st.title("PDF Uploader")
-st.write("Upload a PDF file to view its content.")
+main= Flask(__name__)
 
-# File uploader
-pdf_file = st.file_uploader("Choose a PDF file", type="pdf")
-
-if pdf_file is not None:
-    # Read the PDF file
-    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
-
-    # Display the number of pages
-    st.write(f"Number of pages: {pdf_reader.numPages}")
-
-    # Display the text content of each page
-    for page_num in range(pdf_reader.numPages):
-        page = pdf_reader.getPage(page_num)
-        st.write(f"Page {page_num + 1} content:")
-        st.write(page.extractText())
-
-st.markdown(
-    """
-        # Custom CSS and HTML styling
-custom_css = 
-<style>
-body {
-    font-family: Arial, sans-serif;
+# Define the list of subjects with their associated PDF files
+subjects = {
+    'Python': 'python Unit 1.pdf',
+    'Java': 'java.pdf',
+    'Machine Learning': 'machine_learning.pdf'
 }
-.container {
-    max-width: 800px;
-    margin: auto;
-}
-</style>
 
-(custom_css, unsafe_allow_html=True)
+@main.route('/')
+def index():
+    return render_template('index.html', subjects=subjects)
 
-container = st.container()
-with container:
-    # Your existing code
-        """)
+@main.route('/subjects/<filename>')
+def download_subject(filename):
+    return send_from_directory('pdfs', filename)
+
+if __name__ == '__main__':
+    main.run(debug=True)
