@@ -48,27 +48,3 @@ def display_about_page():
 
 if __name__ == "__main__":
     main()
-st.markdown(
-"""
-<DOCTYPE html>
-<html>
-<head>
-<title>BRAIN BLOOM PROJECT<title>
-<style type ="text/css">
-{padding:0;margin:0;box-sizing:border-box;}
-header{
-width:100%;
-height:100vh;
-background:url(img/LanadelRey.JPEG);
-background-size:cover;
-}
-</style>
-</head>
-<body>
-<header>
-
-</header>
-</body>
-<html>
-""",
-unsafe_allow_html=True)
