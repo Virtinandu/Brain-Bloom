@@ -1,5 +1,5 @@
 import streamlit as st
-
+from PIL import Image
 def main():
     # Sidebar options
     st.sidebar.title("Index")
@@ -14,7 +14,7 @@ def main():
 
 def display_home_page():
     st.header("Welcome to our Study Material Website")
-
+    image=Image.open('image.jpeg')
 def display_subjects_page():
     st.header("Subjects")
     subjects = ["Python", "Android", "Java", "Computer Networks"]
