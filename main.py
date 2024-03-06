@@ -1,52 +1,43 @@
 import streamlit as st
-from PyPDF2 import PdfFileReader
-import streamlit_option_menu as st_option_menu
+import PyPDF2
 
-# Set page title and favicon
-st.set_page_config(page_title="Study Material", page_icon=":books:", layout="wide")
+# Title and brief description
+st.title("PDF Uploader")
+st.write("Upload a PDF file to view its content.")
 
-# Add a CSS file to style the app
-st.markdown("""
+# File uploader
+pdf_file = st.file_uploader("Choose a PDF file", type="pdf")
+
+if pdf_file is not None:
+    # Read the PDF file
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+
+    # Display the number of pages
+    st.write(f"Number of pages: {pdf_reader.numPages}")
+
+    # Display the text content of each page
+    for page_num in range(pdf_reader.numPages):
+        page = pdf_reader.getPage(page_num)
+        st.write(f"Page {page_num + 1} content:")
+        st.write(page.extractText())
+
+st.markdown(
+    """
+        # Custom CSS and HTML styling
+custom_css = 
 <style>
-.big-font {
-    font-size: 30px;
-    color: #3F84B3;
+body {
+    font-family: Arial, sans-serif;
 }
-.sidebar {
-    background-color: #F2F2F2;
-    padding: 10px;
-    border-radius: 5px;
-}
-.pdf-container {
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    height: 80vh;
-    overflow-y: scroll;
+.container {
+    max-width: 800px;
+    margin: auto;
 }
 </style>
-""", unsafe_allow_html=True)
 
-# Add sidebar with options
-selected_chapter = st_option_menu.sidebar("Chapters", ["Chapter 1", "Chapter 2", "Chapter 3"], index=0)
+(custom_css, unsafe_allow_html=True)
 
-# Load PDF and display selected chapter
-pdf_path = "path/to/your/pdf/study_material.pdf"
-pdf = PdfFileReader(open(pdf_path, "rb"))
-num_pages = pdf.getNumPages()
-
-for i in range(num_pages):
-    page = pdf.getPage(i)
-    if i == 0 and selected_chapter != "Chapter 1":
-        continue
-    elif i == num_pages - 1 and selected_chapter == "Chapter 3":
-        break
-    elif i >= num_pages - 1 or i < (pdf.getPage(num_pages - 1).extractText().split(" ")).index(selected_chapter):
-        st.sidebar.write(f"Page {i+1}")
-        st.sidebar.markdown(page.extractText(), unsafe_allow_html=True)
-        st.markdown("""
-        <div class="pdf-container">
-            {}
-        </div>
-        """.format(page.extractText()), unsafe_allow_html=True)
+container = st.container()
+with container:
+    # Your existing code
+        """)
