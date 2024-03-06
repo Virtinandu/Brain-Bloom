@@ -12,7 +12,7 @@ def main():
         display_about_page()
 
 def display_home_page():
-    st.header("Welcome to our Study Material Website")
+    st.header("Welcome to Brain Bloom")
 def display_subjects_page():
     st.header("Subjects")
     subjects = ["Python", "Android", "Java", "Computer Networks"]
