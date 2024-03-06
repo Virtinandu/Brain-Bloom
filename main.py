@@ -13,7 +13,7 @@ def main():
 
 def display_home_page():
     st.header("Welcome to Brain Bloom")
-    st.header_alignment='center'
+    st.header_alignment=('center')
 def display_subjects_page():
     st.header("Subjects")
     subjects = ["Python", "Android", "Java", "Computer Networks"]
