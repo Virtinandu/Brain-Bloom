@@ -60,7 +60,7 @@ header{
 width:100%;
 height:100vh;
 background:url(img/LanadelRey.JPEG);
-backgroung-size:cover;
+background-size:cover;
 }
 </style>
 </head>
