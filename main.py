@@ -48,7 +48,7 @@ def display_about_page():
 
 if __name__ == "__main__":
     main()
-
+st.markdown(
 """
 <DOCTYPE html>
 <html>
@@ -70,5 +70,5 @@ background-size:cover;
 </header>
 </body>
 <html>
-
-"""
+""",
+unsafe_allow_html=True)
