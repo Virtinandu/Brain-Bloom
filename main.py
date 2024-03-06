@@ -1,4 +1,6 @@
 import streamlit as st
+from PyPDF2 import PdfFileReader
+import streamlit_option_menu as st_option_menu
 
 # Set page title and favicon
 st.set_page_config(page_title="Study Material", page_icon=":books:", layout="wide")
@@ -10,23 +12,41 @@ st.markdown("""
     font-size: 30px;
     color: #3F84B3;
 }
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px;
-    margin: 10px;
+.sidebar {
+    background-color: #F2F2F2;
     padding: 10px;
+    border-radius: 5px;
 }
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.pdf-container {
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    height: 80vh;
+    overflow-y: scroll;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# Add study material as markdown links
-st.write("<h1 class='big-font'>Study Material</h1>", unsafe_allow_html=True)
-st.write("<a class='card' href='https://www.oreilly.com/library/view/python-cookbook-3rd/9781449357332/' target='_blank'>Python Cookbook</a>", unsafe_allow_html=True)
-st.write("<a class='card' href='https://automatetheboringstuff.com/' target='_blank'>Automate the Boring Stuff</a>", unsafe_allow_html=True)
-st.write("<a class='card' href='https://docs.scipy.org/doc/numpy/reference/' target='_blank'>NumPy Reference</a>", unsafe_allow_html=True)
-st.write("<a class='card' href='https://pandas.pydata.org/docs/' target='_blank'>Pandas Documentation</a>", unsafe_allow_html=True)
-st.write("<a class='card' href='https://matplotlib.org/stable/contents.html' target='_blank'>Matplotlib Documentation</a>", unsafe_allow_html=True)
+# Add sidebar with options
+selected_chapter = st_option_menu.sidebar("Chapters", ["Chapter 1", "Chapter 2", "Chapter 3"], index=0)
+
+# Load PDF and display selected chapter
+pdf_path = "path/to/your/pdf/study_material.pdf"
+pdf = PdfFileReader(open(pdf_path, "rb"))
+num_pages = pdf.getNumPages()
+
+for i in range(num_pages):
+    page = pdf.getPage(i)
+    if i == 0 and selected_chapter != "Chapter 1":
+        continue
+    elif i == num_pages - 1 and selected_chapter == "Chapter 3":
+        break
+    elif i >= num_pages - 1 or i < (pdf.getPage(num_pages - 1).extractText().split(" ")).index(selected_chapter):
+        st.sidebar.write(f"Page {i+1}")
+        st.sidebar.markdown(page.extractText(), unsafe_allow_html=True)
+        st.markdown("""
+        <div class="pdf-container">
+            {}
+        </div>
+        """.format(page.extractText()), unsafe_allow_html=True)
