@@ -54,7 +54,7 @@ st.markdown(
     """
     <style>
         body {
-            background-color: #f0f2f6;
+            background-color:  #E6E6FA;
             font-family: Arial, sans-serif;
         }
         .sidebar .sidebar-content {
@@ -68,7 +68,7 @@ st.markdown(
             padding: 20px;
         }
         .st-df {
-            background-color: #fff;
+            background-color: #000000;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
